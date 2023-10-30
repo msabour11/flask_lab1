@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block body %}
+ <div class="container">
+    <div class=" pt-5 text-start">
+        <a href="{{url_for('posts.create')}}" class="btn btn-danger" >create post</a>
+    </div>
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 pt-3 pb-5">
+      {% for post in posts %}
+      <div class="card border-0 mb-3 ">
+            {% if post.image %}
+              <img src="{{ url_for('static', filename='posts/images/' + post.image) }}" class="card-img-top rounded-3 mb-2" height="370">
+            {% else %}
+              <img src="{{ url_for('static', filename='posts/images/placeholder.png') }}" class="card-img-top rounded-3 mb-2" height="370">
+            {% endif %}
+        <div class="card-body text-center p-0 ">
+            <h5 class="card-title">{{post.title}}</h5>
+            <h5 class="card-title">{{post.body}}</h5>
+            <div class="d-flex justify-content-around   ">
+                 <a href="{{url_for('posts.show', id=post.id)}}" class="btn btn-primary">show</a>
+                 <a href="{{url_for('posts.edit', id=post.id)}}" class="btn btn-secondary">edit</a>
+
+                 <a href="{{url_for('posts.delete', id=post.id)}}" class="btn btn-danger">delete</a>
+
+                
+        
+            </div>
+
+
+           
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
